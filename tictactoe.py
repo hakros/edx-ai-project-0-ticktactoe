@@ -68,7 +68,11 @@ def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-    raise NotImplementedError
+    playerTurn = player(board=board)
+
+    board[action[0]][action[1]] = playerTurn
+
+    return board
 
 
 def winner(board):

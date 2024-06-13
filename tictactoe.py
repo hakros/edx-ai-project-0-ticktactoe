@@ -39,15 +39,30 @@ def player(board):
         elif board[yPos][xPos] == O:
             player2_moves += 1
 
-    return O if player1_moves > player2_moves else X\
+    return O if player1_moves > player2_moves else X
 
 
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    raise NotImplementedError
+    possibleActions = []
 
+    xLen = len(board[0])
+    yLen = len(board)
+
+    boardArea = xLen * yLen
+
+    for i in range(boardArea):
+        yPos = i // yLen
+        xPos = i % xLen
+
+        if board[yPos][xPos] != EMPTY:
+            continue
+
+        possibleActions.append((yPos, xPos))
+
+    return possibleActions
 
 def result(board, action):
     """

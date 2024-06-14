@@ -205,6 +205,9 @@ def recurseMin(state, depth):
             possibleAction
         )
 
+        if winner(newBoard) is not None and depth <= 0:
+            return 0
+
         # Find the maximum number of moves before a win if this move is used
         # Every recursion, we add 1 to the depth or number of moves made
         newValue = recurseMax(newBoard, depth+1)
@@ -232,6 +235,9 @@ def recurseMax(state, depth):
             state,
             possibleAction
         )
+
+        if winner(newBoard) is not None and depth <= 0:
+            return 9
 
         # Find the minimum number of moves before a win if this move is used
         # Every recursion, we add 1 to the depth or number of moves made

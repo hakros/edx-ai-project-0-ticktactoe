@@ -191,7 +191,7 @@ def utility(board):
 def recurseMin(state, depth):
     """A recursive function that finds the lowest number of move before a win"""
     # Stop recursion once the game is over
-    if terminal(state) is True:
+    if terminal(state) is True or depth >= 3:
         return depth
 
     possibleActions = actions(state)
@@ -219,7 +219,7 @@ def recurseMin(state, depth):
 def recurseMax(state, depth):
     """A recursive function that finds the highest number of move before a win"""
     # Stop recursion once the game is over
-    if terminal(state) is True:
+    if terminal(state) is True or depth >= 3:
         return depth
 
     possibleActions = actions(state)
@@ -271,6 +271,7 @@ def minimax(board):
         )
 
         if playerToMove == O:
+            # We are the minimizing player
             # Find the lowest number of move before we lose, if we use this move
             newValue = recurseMin(newBoard, 0)
 
@@ -281,6 +282,7 @@ def minimax(board):
                 value = newValue
                 moveToUse = possibleAction
         elif playerToMove == X:
+            # We are the maximizing player
             # Find the highest number of moves before we win, if we use this move
             newValue = recurseMax(newBoard, 0)
 

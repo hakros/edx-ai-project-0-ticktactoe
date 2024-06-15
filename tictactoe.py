@@ -4,6 +4,8 @@ Tic Tac Toe Player
 
 import math
 import copy
+import random
+from time import sleep
 
 X = "X"
 O = "O"
@@ -287,6 +289,8 @@ def minimax(board):
             if (newValue > value):
                 value = newValue
                 moveToUse = possibleAction
+            elif value == newValue:
+                moveToUse = random.choice([moveToUse, possibleAction])
         elif playerToMove == X:
             # We are the maximizing player
             # Find the highest number of moves before we win, if we use this move
@@ -298,5 +302,22 @@ def minimax(board):
             if (newValue < value):
                 value = newValue
                 moveToUse = possibleAction
+            elif value == newValue:
+                moveToUse = random.choice([moveToUse, possibleAction])
 
     return moveToUse
+
+# board = initial_state()
+# while terminal(board) is False:
+#     move = minimax(board)
+
+#     board = result(board, move)
+
+#     print(board[0][0] or " ", '|', board[0][1] or " ", '|', board[0][2] or " ")
+#     print('---------')
+#     print(board[1][0] or " ", '|', board[1][1] or " ", '|', board[1][2] or " ")
+#     print('---------')
+#     print(board[2][0] or " ", '|', board[2][1] or " ", '|', board[2][2] or " ")
+#     print("\n\n\n\n\n")
+
+#     sleep(1)

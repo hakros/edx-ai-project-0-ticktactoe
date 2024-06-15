@@ -270,7 +270,7 @@ def minimax(board):
     # O is the min player so we set initial value as low as possible for him
     # X is the max player so we set initial value as high as possible for him
     # max player is always the first to move
-    value = -(math.inf) if playerToMove == O else math.inf
+    value = -(math.inf)
 
     for possibleAction in possibleActions:
         newBoard = result(
@@ -278,32 +278,20 @@ def minimax(board):
             possibleAction
         )
 
-        if playerToMove == O:
-            # We are the minimizing player
-            # Find the lowest number of move before we lose, if we use this move
-            newValue = recurseMin(newBoard, 0)
+        if terminal(newBoard) is True:
+            return possibleAction
 
-            # If this move gives us the lower chance to lose compared to the move stored in moveToUse,
-            # This is the new best move
-            # Example: 5 > 4 moves. 5 moves before lose is better than 4 moves before lose
-            if (newValue > value):
-                value = newValue
-                moveToUse = possibleAction
-            elif value == newValue:
-                moveToUse = random.choice([moveToUse, possibleAction])
-        elif playerToMove == X:
-            # We are the maximizing player
-            # Find the highest number of moves before we win, if we use this move
-            newValue = recurseMax(newBoard, 0)
+        # Find the lowest number of move before we lose, if we use this move
+        newValue = recurseMin(newBoard, 0)
 
-            # If this move gives us the higher chance to win compared to the move stored in moveToUse,
-            # This is the new best move
-            # Example 4 < 5 moves. 4 moves before win is better than 5 moves before win
-            if (newValue < value):
-                value = newValue
-                moveToUse = possibleAction
-            elif value == newValue:
-                moveToUse = random.choice([moveToUse, possibleAction])
+        # If this move gives us the lower chance to lose compared to the move stored in moveToUse,
+        # This is the new best move
+        # Example: 5 > 4 moves. 5 moves before lose is better than 4 moves before lose
+        if (newValue > value):
+            value = newValue
+            moveToUse = possibleAction
+        elif value == newValue:
+            moveToUse = random.choice([moveToUse, possibleAction])
 
     return moveToUse
 
